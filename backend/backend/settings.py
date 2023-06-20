@@ -7,17 +7,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 load_dotenv(os.path.join(BASE_DIR.parent.parent, 'infra/.env'), verbose=True)
 
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = ('django-insecure-2!w)9s75orq5@-!g3tph'
               '-29wjso&@ed@d%g#oi-ox6!je+ff$2')
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['localhost', 'backend', '158.160.97.65']
 
-
-# Application definition
+CSRF_TRUSTED_ORIGINS = [
+    'http://*.158.160.97.65',
+    'https://*.158.160.97.65',
+    'https://*.127.0.0.1'
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -28,6 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
+    'corsheaders',
     'colorfield',
     'djoser',
     'django_filters',
@@ -41,6 +43,7 @@ AUTH_USER_MODEL = 'users.User'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -68,24 +71,17 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'backend.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
 DATABASES = {
-   'default': {
-       'ENGINE': os.environ.get('DB_ENGINE', 'django.db.backends.sqlite3'),
-       'NAME': os.environ.get('POSTGRES_DB', BASE_DIR / 'db.sqlite3'),
-       'USER': os.environ.get('POSTGRES_USER'),
-       'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
-       'HOST': os.environ.get('DB_HOST'),
-       'PORT': os.environ.get('DB_PORT'),
-   }
+    'default': {
+        'ENGINE': os.environ.get('DB_ENGINE', default='django.db.backends.postgresql'),
+        'NAME': os.environ.get('POSTGRES_DB', default='postgres'),
+        'USER': os.environ.get('POSTGRES_USER', default='postgres'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', default='postgres'),
+        'HOST': os.environ.get('DB_HOST', default='db'),
+        'PORT': os.environ.get('DB_PORT', default=5432),
+    }
 }
 
-
-# Password validation
-# https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -135,30 +131,21 @@ DJOSER = {
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-RU'
 
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
+USE_L10N = True
+
 USE_TZ = True
 
-STATIC_URL = "/backend_static/"
-STATIC_ROOT = os.path.join(BASE_DIR, "backend_static")
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-# static_path = Path('../docs')
-# STATICFILES_DIRS = [
-#     static_path,
-# ]
-
-MEDIA_URL = '/backend_media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'backend_media')
-
-
-# STATIC_URL = 'static/'
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

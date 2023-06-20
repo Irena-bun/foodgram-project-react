@@ -90,7 +90,9 @@ class IngredientViewSet(viewsets.ModelViewSet):
 class RecipeViewSet(viewsets.ModelViewSet):
     """Вьюсет для рецептов"""
     queryset = Recipe.objects.select_related('author').prefetch_related(
-        Prefetch('ingredients', to_attr='tags', queryset = Ingredient.objects.all()))
+        Prefetch('ingredients', to_attr='tags',
+                 queryset=Ingredient.objects.all())
+    )
     filter_backends = (DjangoFilterBackend,)
     permission_classes = (IsAuthorAdminOrReadOnly,)
     default_serializer_class = AddRecipeSerializer
