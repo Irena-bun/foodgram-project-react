@@ -131,6 +131,6 @@ dmypy.json
 # .idea
 .idea
 
-.frontend/node_modules
-.frontend/build
-.infra/database
+frontend/node_modules
+frontend/build
+infra/database
