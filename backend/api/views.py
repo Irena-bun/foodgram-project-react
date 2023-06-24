@@ -92,7 +92,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
     queryset = Recipe.objects.select_related('author').prefetch_related(
         Prefetch('ingredients', to_attr='tags',
                  queryset=RecipeIngredient.objects.select_related(
-                     'ingredient'))
+                     'recipe'))
     )
     filter_backends = (DjangoFilterBackend,)
     permission_classes = (IsAuthorAdminOrReadOnly,)
