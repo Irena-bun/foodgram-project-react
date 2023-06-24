@@ -95,17 +95,22 @@ class RecipeViewSet(viewsets.ModelViewSet):
     )
     filter_backends = (DjangoFilterBackend,)
     permission_classes = (IsAuthorAdminOrReadOnly,)
-    default_serializer_class = AddRecipeSerializer
-    serializer_classes = {
-        "retrieve": ShowRecipeSerializer,
-        "list": ShowRecipeSerializer,
-    }
     filterset_class = RecipeFilter
+    # default_serializer_class = AddRecipeSerializer
+    # serializer_classes = {
+    #    "retrieve": ShowRecipeSerializer,
+    #    "list": ShowRecipeSerializer,
+    #}
+
+    # def get_serializer_class(self):
+    #    return self.serializer_classes.get(
+    #        self.action, self.default_serializer_class
+    #    )
 
     def get_serializer_class(self):
-        return self.serializer_classes.get(
-            self.action, self.default_serializer_class
-        )
+        if self.action in ('list', 'retrieve'):
+            return ShowRecipeSerializer
+        return AddRecipeSerializer
 
     def __add_or_del_recipe(self, method, user, pk, model, serializer):
         """Добавление/удаление в избранное или список покупок"""
