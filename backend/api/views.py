@@ -96,16 +96,6 @@ class RecipeViewSet(viewsets.ModelViewSet):
     filter_backends = (DjangoFilterBackend,)
     permission_classes = (IsAuthorAdminOrReadOnly,)
     filterset_class = RecipeFilter
-    # default_serializer_class = AddRecipeSerializer
-    # serializer_classes = {
-    #    "retrieve": ShowRecipeSerializer,
-    #    "list": ShowRecipeSerializer,
-    #}
-
-    # def get_serializer_class(self):
-    #    return self.serializer_classes.get(
-    #        self.action, self.default_serializer_class
-    #    )
 
     def get_serializer_class(self):
         if self.action in ('list', 'retrieve'):
