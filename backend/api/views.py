@@ -28,7 +28,7 @@ class CustomUserViewSet(UserViewSet):
     queryset = User.objects.all()
     serializer_class = CustomUserSerializer
     pagination_class = PageNumberPagination
-    permission_classes = [IsAuthenticatedOrReadOnly,]
+    permission_classes = [IsAuthenticatedOrReadOnly, ]
 
     @action(
         detail=True,
@@ -156,7 +156,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
         methods=['GET'],
         url_name='download_shopping_cart',
         url_path='download_shopping_cart',
-        permission_classes=[IsAuthenticated,],
+        permission_classes=[IsAuthenticated, ],
     )
     def download_shopping_cart(self, request):
         """Выгрузка списка покупок"""
