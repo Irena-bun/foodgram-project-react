@@ -14,7 +14,7 @@ def validate_email(email):
     validate = re.sub(r'^[\w.@+-]+$', '', email)
     if validate:
         bad_symbols = re.sub(
-            r'([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)', '', email
+            r'^[\w.@+-]+$', '', email
         )
         raise ValidationError(f'Недопустимые символы '
                               f'в email: {bad_symbols}'
