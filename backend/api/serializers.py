@@ -182,7 +182,7 @@ class ShowRecipeSerializer(serializers.ModelSerializer):
 #        ingredients = RecipeIngredient.objects.filter(
 #            recipe=obj).select_related('ingredient')
         ingredients = RecipeIngredient.objects.select_related(
-            'recipe').filter(obj.ingredients).exists()
+            'recipe').filter(obj.ingredients)
         return ShowIngredientsInRecipeSerializer(ingredients, many=True).data
 
     def get_is_favorited(self, obj):
