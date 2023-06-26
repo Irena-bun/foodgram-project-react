@@ -181,8 +181,8 @@ class ShowRecipeSerializer(serializers.ModelSerializer):
         """Получаем ингредиенты из модели RecipeIngredient"""
 #        ingredients = RecipeIngredient.objects.filter(
 #            recipe=obj).select_related('ingredient')
-        ingredients = RecipeIngredient.objects.filter(
-            recipe=obj.ingredients).select_related('ingredient')
+        ingredients = RecipeIngredient.objects.select_related(
+            'ingredient').filter(obj.ingredients)
         return ShowIngredientsInRecipeSerializer(ingredients, many=True).data
 
     def get_is_favorited(self, obj):
