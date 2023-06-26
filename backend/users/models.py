@@ -15,7 +15,7 @@ class User(AbstractUser):
         verbose_name='Имя пользователя',
         unique=True,
         max_length=150,
-        validators=[validate_username, ]
+        validators=[validate_username]
     )
     password = models.CharField(
         verbose_name='Пароль',
@@ -26,7 +26,7 @@ class User(AbstractUser):
         verbose_name='Email',
         unique=True,
         max_length=254,
-        validators=[validate_email, ]
+        validators=[validate_email]
     )
     role = models.CharField(
         verbose_name='Роль',
