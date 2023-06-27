@@ -176,14 +176,14 @@ class ShowRecipeSerializer(serializers.ModelSerializer):
                   'ingredients', 'name', 'image', 'text',
                   'cooking_time', 'is_in_shopping_cart',)
 
-    @staticmethod
-    def get_ingredients(obj):
-        """Получаем ингредиенты из модели RecipeIngredient"""
+#    @staticmethod
+#    def get_ingredients(obj):
+#        """Получаем ингредиенты из модели RecipeIngredient"""
 #        ingredients = RecipeIngredient.objects.filter(
 #            recipe=obj).select_related('ingredient')
 #        ingredients = RecipeIngredient.objects.filter(obj.ingredients)
-        ingredients = Recipe.objects.filter(obj.ingredients)
-        return ShowIngredientsInRecipeSerializer(ingredients, many=True).data
+#        ingredients = Recipe.objects.filter(obj.ingredients)
+#        return ShowIngredientsInRecipeSerializer(ingredients, many=True).data
 
     def get_is_favorited(self, obj):
         """Проверяем в избранном ли рецепт"""
