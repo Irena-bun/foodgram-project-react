@@ -165,7 +165,8 @@ class ShowRecipeSerializer(serializers.ModelSerializer):
     """Сериализатор для отображения рецепта"""
     tags = TagSerializer(many=True, read_only=True)
     author = CustomUserSerializer(read_only=True)
-    ingredients = serializers.SerializerMethodField()
+#    ingredients = serializers.SerializerMethodField()
+    ingredients = ShowIngredientsInRecipeSerializer
     image = Base64ImageField()
     is_favorited = serializers.SerializerMethodField()
     is_in_shopping_cart = serializers.SerializerMethodField()
@@ -181,7 +182,7 @@ class ShowRecipeSerializer(serializers.ModelSerializer):
 #        """Получаем ингредиенты из модели RecipeIngredient"""
 #        ingredients = RecipeIngredient.objects.filter(
 #            recipe=obj).select_related('ingredient')
-#        ingredients = RecipeIngredient.objects.filter(obj.ingredients)
+#        ingredients = RecipeIngredient.objects(recipe=obj.ingredients)
 #        ingredients = Recipe.objects.filter(obj.ingredients)
 #        return ShowIngredientsInRecipeSerializer(ingredients, many=True).data
 
