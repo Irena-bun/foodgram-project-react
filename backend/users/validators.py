@@ -31,4 +31,4 @@ def validate_email(email):
     if bad_symbols:
         raise ValidationError(f'Недопустимые символы в email: {bad_symbols}')
     if not check_email_form(email):
-        raise ValidationError
+        raise ValidationError('Недопустимый формат email')
