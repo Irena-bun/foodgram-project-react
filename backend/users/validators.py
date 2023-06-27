@@ -19,7 +19,7 @@ def validate_username(username):
 
 
 def get_bad_symbols(email: str) -> str:
-    return re.sub(r'^[\w.@+-]+$', '', email)
+    return re.sub(r'\w|@|\.', '', email)
 
 
 def check_email_form(email) -> bool:
@@ -31,4 +31,4 @@ def validate_email(email):
     if bad_symbols:
         raise ValidationError(f'Недопустимые символы в email: {bad_symbols}')
     if not check_email_form(email):
-        raise ValidationError('Недопустимый формат email', email)
+        raise ValidationError
