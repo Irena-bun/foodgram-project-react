@@ -179,9 +179,10 @@ class ShowRecipeSerializer(serializers.ModelSerializer):
     @staticmethod
     def get_ingredients(obj):
         """Получаем ингредиенты из модели RecipeIngredient"""
-        ingredients = RecipeIngredient.objects.filter(
-            recipe=obj).select_related('ingredient')
-        return ShowIngredientsInRecipeSerializer(ingredients, many=True).data
+#        ingredients = RecipeIngredient.objects.filter(
+#            recipe=obj).select_related('ingredient')
+#        return ShowIngredientsInRecipeSerializer(ingredients, many=True).data
+        return obj.tags
 
     def get_is_favorited(self, obj):
         """Проверяем в избранном ли рецепт"""
