@@ -192,7 +192,7 @@ class ShowRecipeSerializer(serializers.ModelSerializer):
 #        return ShowIngredientsInRecipeSerializer(obj.tags, many=True).data
 #
         return ShowIngredientsInRecipeSerializer(
-            obj.tags.all(), many=True).data
+            obj.ingredients.all(), many=True).data
 
     def get_is_favorited(self, obj):
         """Проверяем в избранном ли рецепт"""
