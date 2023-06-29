@@ -90,7 +90,7 @@ class IngredientViewSet(viewsets.ModelViewSet):
 class RecipeViewSet(viewsets.ModelViewSet):
     """Вьюсет для рецептов"""
     queryset = Recipe.objects.select_related('author').prefetch_related(
-        Prefetch('ingredients', to_attr='ingredients_atr',
+        Prefetch('ingredients', to_attr='tags',
                  queryset=RecipeIngredient.objects.select_related(
                      'recipe'))
     )
